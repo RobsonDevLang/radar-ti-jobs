@@ -4,19 +4,24 @@ Aplicação web que monitora concursos públicos de TI, filtra por cidade/cargo 
 
 ## Ajustes de stack (importante)
 
-A stack pedida (Node/Express + Prisma + Docker) não é executável nesta plataforma. O equivalente 1:1, sem perda de recursos:
+A stack pedida (Node/Express + Prisma + Docker) não é executável nesta plataforma, e o Lovable Cloud fica de fora por sua escolha. O backend será o **Supabase na sua própria conta (plano free)**, conectado ao projeto pela integração Supabase — sem custo e com os dados sob seu controle.
 
 | Pedido | Nesta plataforma |
 |---|---|
 | React + TypeScript + Tailwind | Igual (TanStack Start) |
 | Node.js + API REST | Server functions e rotas `/api/*` (mesmo runtime de servidor) |
-| PostgreSQL (Supabase) | Lovable Cloud (Postgres/Supabase gerenciado) |
-| Prisma ORM | Migrations SQL + client tipado gerado |
-| JWT | Auth gerenciada (JWT + RLS por usuário) |
+| PostgreSQL (Supabase) | Seu projeto Supabase gratuito (500 MB, suficiente para as fases) |
+| Prisma ORM | Migrations SQL versionadas + client tipado gerado |
+| JWT | Supabase Auth (JWT) + RLS por usuário |
 | Docker | Deploy gerenciado (sem container manual) |
-| Cron diário 09:00 | Agendador do banco chamando rota pública protegida |
+| Cron diário 09:00 | `pg_cron` gratuito no seu Supabase chamando a rota `/api/public/cron/daily` |
+
+O que você precisa fazer uma única vez na Fase 1: criar conta em supabase.com, criar um projeto e conectá-lo aqui. Eu cuido de migrations, auth e código.
+
+Limites do plano free a considerar: projeto pausa após ~1 semana sem uso (basta reativar), e-mails de autenticação têm baixa cota (na Fase 6 usaremos um provedor de e-mail próprio com plano free, ex.: Resend 3.000 e-mails/mês).
 
 Tudo o mais (camadas, scrapers plugáveis, retry, cache, rate limit, logs, testes) é mantido.
+
 
 ## Arquitetura
 
