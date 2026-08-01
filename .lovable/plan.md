@@ -98,7 +98,7 @@ Externas: sites de concursos (API oficial quando existir, senão scraping com ra
 
 ## Fase 1 — escopo exato desta próxima etapa
 
-- Ativar Lovable Cloud (banco + auth).
+- Conectar o seu projeto Supabase gratuito (você cria a conta; eu conecto e configuro).
 - Tabela `profiles` + trigger de criação no cadastro; `user_roles`.
 - Páginas: landing `/`, `/auth` (cadastro + login), `/reset-password`, `/dashboard` protegido.
 - Identidade visual própria (tokens semânticos, sem gradiente roxo genérico), pt-BR.
