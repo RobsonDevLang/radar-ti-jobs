@@ -1,10 +1,12 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { Bell, Database, Filter, LogOut, Radar } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/features/auth/auth-context";
 import { getSupabase } from "@/lib/supabase";
+import { PLANNED_SOURCES, listScrapers } from "@/lib/scrapers/registry";
+
 import { PLANNED_SOURCES, listScrapers } from "@/lib/scrapers/registry";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
@@ -27,8 +29,9 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 
 const roadmap = [
   { fase: "Fase 1", titulo: "Estrutura, banco e autenticação", status: "Concluída" },
-  { fase: "Fase 2", titulo: "Modelagem completa do banco", status: "Próxima" },
-  { fase: "Fase 3", titulo: "Coletores dos 8 portais", status: "Planejada" },
+  { fase: "Fase 2", titulo: "Modelagem completa do banco", status: "Concluída" },
+  { fase: "Fase 3", titulo: "Coletores dos 8 portais", status: "Próxima" },
+
   { fase: "Fase 4", titulo: "Mecanismo de filtros", status: "Planejada" },
   { fase: "Fase 5", titulo: "Primeira execução e relatório", status: "Planejada" },
   { fase: "Fase 6", titulo: "Notificações e-mail e WhatsApp", status: "Planejada" },
