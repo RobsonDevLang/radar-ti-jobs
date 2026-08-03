@@ -23,7 +23,7 @@ export async function getUserFilter(userId: string): Promise<UserFilterRow | nul
     .limit(1)
     .maybeSingle();
   if (error) throw error;
-  return (data as UserFilterRow | null) ?? null;
+  return data ?? null;
 }
 
 export async function saveUserFilter(
@@ -42,7 +42,7 @@ export async function saveUserFilter(
       .select("*")
       .single();
     if (error) throw error;
-    return data as UserFilterRow;
+    return data;
   }
 
   const { data, error } = await client()
@@ -51,7 +51,7 @@ export async function saveUserFilter(
     .select("*")
     .single();
   if (error) throw error;
-  return data as UserFilterRow;
+  return data;
 }
 
 export async function listContests(limit = 50): Promise<ContestRow[]> {
@@ -61,7 +61,7 @@ export async function listContests(limit = 50): Promise<ContestRow[]> {
     .order("published_at", { ascending: false, nullsFirst: false })
     .limit(limit);
   if (error) throw error;
-  return (data ?? []) as ContestRow[];
+  return data ?? [];
 }
 
 export async function listQueryHistory(limit = 50): Promise<QueryHistoryRow[]> {
@@ -71,7 +71,7 @@ export async function listQueryHistory(limit = 50): Promise<QueryHistoryRow[]> {
     .order("executed_at", { ascending: false })
     .limit(limit);
   if (error) throw error;
-  return (data ?? []) as QueryHistoryRow[];
+  return data ?? [];
 }
 
 export async function listSentNotifications(
@@ -85,5 +85,5 @@ export async function listSentNotifications(
     .order("sent_at", { ascending: false })
     .limit(limit);
   if (error) throw error;
-  return (data ?? []) as SentNotificationRow[];
+  return data ?? [];
 }
