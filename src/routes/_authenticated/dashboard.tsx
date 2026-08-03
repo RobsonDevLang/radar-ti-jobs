@@ -7,7 +7,7 @@ import { useAuth } from "@/features/auth/auth-context";
 import { getSupabase } from "@/lib/supabase";
 import { PLANNED_SOURCES, listScrapers } from "@/lib/scrapers/registry";
 
-import { PLANNED_SOURCES, listScrapers } from "@/lib/scrapers/registry";
+
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
