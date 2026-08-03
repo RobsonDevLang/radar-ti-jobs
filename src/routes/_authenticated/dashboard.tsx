@@ -60,10 +60,16 @@ function Dashboard() {
           </div>
           <div className="flex items-center gap-3">
             <span className="hidden text-sm text-muted-foreground sm:inline">{user?.email}</span>
+            <Button variant="ghost" size="sm" asChild>
+              <Link to="/filtros">
+                <Filter className="h-4 w-4" aria-hidden /> Filtros
+              </Link>
+            </Button>
             <Button variant="outline" size="sm" onClick={() => void signOut()}>
               <LogOut className="h-4 w-4" aria-hidden /> Sair
             </Button>
           </div>
+
         </div>
       </header>
 
