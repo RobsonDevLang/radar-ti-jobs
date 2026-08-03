@@ -1,320 +1,259 @@
 # Radar TI Jobs
 
-Quero desenvolver uma aplicação web chamada Radar Concursos TI.
+Vamos modificar o plano inicial, e iniciar o 3.1
 
-O objetivo da aplicação é monitorar automaticamente concursos públicos voltados para profissionais de Tecnologia da Informação, enviando notificações por e-mail e WhatsApp quando forem encontrados novos concursos compatíveis com os filtros definidos pelo usuário.
+ase 3 — Arquitetura do módulo de coleta (dividir)
 
-Importante
+Essa é a maior divisão necessária.
 
-Quero que o projeto seja desenvolvido em fases, concluindo e validando cada etapa antes de iniciar a próxima.
+3.1 Criar estrutura de coleta
 
-Antes de gerar qualquer código, apresente:
+Criar:
 
-arquitetura do sistema;
+scrapers/
+ ├── base/
+ │    ├── scraper.interface.ts
+ │
+ ├── pci/
+ ├── acheConcursos/
+ ├── jcConcursos/
+ └── ...
 
-estrutura das pastas;
+Implementar:
 
-modelagem do banco de dados;
+ interface padrão;
 
-fluxo completo da aplicação;
+ serviço gerenciador de scrapers;
 
-APIs necessárias;
+ sistema de plugins;
 
-cronograma das fases de desenvolvimento.
+ tratamento de erros;
 
-Após minha aprovação, implemente apenas uma fase por vez.
+ logs.
 
-Não avance para a próxima fase sem minha confirmação.
+Ainda sem coletar nenhum site.
 
-Fase 1
+3.2 Implementar primeiro scraper
 
-Criar a estrutura completa do projeto.
+Escolher apenas:
 
-Utilizar:
+ PCI Concursos
 
-React
+Criar:
 
-TypeScript
+ coleta;
 
-Tailwind CSS
+ normalização dos dados;
 
-Node.js
+ gravação no banco.
 
-PostgreSQL (Supabase)
+Validar funcionamento.
 
-Prisma ORM
+3.3 Adicionar demais scrapers
 
-API REST
+Adicionar:
 
-Docker
+ Ache Concursos;
 
-JWT para autenticação
+ JC Concursos;
 
-Nesta fase criar apenas:
+ Estratégia Concursos;
 
-estrutura do frontend;
+ Gran Concursos;
 
-estrutura do backend;
+ Direção Concursos;
 
-configuração do banco;
+ Concurso em Foco;
 
-autenticação;
+ Folha Dirigida/QConcursos.
 
-cadastro de usuários;
+Um por vez.
 
-login;
+Motivo: tentar criar 8 scrapers em uma única fase provavelmente fará o Lovable gerar código incompleto ou genérico.
 
-recuperação de senha;
+Fase 4 — Sistema de filtros (dividir)
 
-configuração do ambiente.
+4.1 Motor de filtragem
 
-Nenhum scraper deve ser implementado nesta fase.
+Implementar:
 
-Fase 2
+ localização;
 
-Implementar o banco de dados.
+ cargos;
 
-Criar as tabelas para:
+ palavras-chave;
 
-usuários;
+ exclusões.
 
-concursos;
+4.2 Configuração do usuário
 
-histórico de consultas;
+Criar tela para:
 
-histórico de notificações;
+ cidade;
 
-filtros dos usuários;
+ estado;
 
-logs de execução.
+ palavras permitidas;
 
-Evitar registros duplicados.
+ palavras bloqueadas;
 
-Utilizar Prisma ORM.
+ preferências.
 
-Fase 3
+4.3 Validação automática
 
-Criar o módulo de coleta de concursos.
+Implementar regras:
 
-A arquitetura deve permitir adicionar novos sites facilmente.
+Excluir:
 
-Cada site deve possuir um scraper independente.
+ CNH obrigatória;
 
-Inicialmente pesquisar os seguintes sites:
+ pós-graduação obrigatória;
 
-PCI Concursos;
+ fora de TI.
 
-Ache Concursos;
+Motivo: filtro de backend e tela de configuração são coisas diferentes.
 
-JC Concursos;
+Fase 5 — Relatório inicial (dividir)
 
-Estratégia Concursos;
+5.1 Primeira busca histórica
 
-Gran Concursos;
+Implementar:
 
-Direção Concursos;
+ busca últimos 6 meses;
 
-Concurso em Foco;
+ processamento;
 
-Folha Dirigida / QConcursos.
+ armazenamento.
 
-Caso algum site possua API oficial, utilizá-la. Caso contrário, implementar scraping respeitando os termos de uso e limites de acesso.
+5.2 Gerador de relatório
 
-Salvar todas as informações encontradas no banco.
+Criar:
 
-Fase 4
+ relatório estruturado;
 
-Criar o mecanismo de filtros.
+ resumo;
 
-A aplicação deve localizar apenas concursos em:
+ links;
 
-Porto Alegre
+ informações completas.
 
-A estrutura deve permitir adicionar outras cidades futuramente.
+5.3 Controle de envio
 
-Os cargos aceitos são:
+Criar:
 
-Analista de Sistemas
+ concursos enviados;
 
-Desenvolvedor de Software
+ controle de duplicidade.
 
-Desenvolvedor Backend
+Fase 6 — Notificações (dividir)
 
-Desenvolvedor Full Stack
+6.1 Sistema de notificações abstrato
 
-Programador
+Criar:
 
-Engenheiro de Software
+notifications/
+ ├── email/
+ ├── whatsapp/
+ └── providers/
 
-Analista de Desenvolvimento
+Com interface:
 
-Analista de TI
+NotificationProvider
 
-Analista de Tecnologia da Informação
+6.2 Integração e-mail
 
-Administrador de Banco de Dados
+Implementar:
 
-DBA
+ SMTP;
 
-Cientista de Dados
+ Resend;
 
-Analista de Dados
+ SendGrid.
 
-Descartar automaticamente concursos que:
+6.3 Integração WhatsApp
 
-exijam CNH como requisito obrigatório;
+Implementar:
 
-exijam pós-graduação obrigatória;
+ Meta Cloud API;
 
-não sejam da área de Tecnologia da Informação.
+ Evolution API.
 
-Fase 5
+Fase 7 — Automação diária (dividir)
 
-Implementar a primeira execução.
+7.1 Scheduler
 
-Ao executar pela primeira vez, pesquisar concursos publicados nos últimos 6 meses.
+Criar:
 
-Gerar um relatório contendo:
+ cron;
 
-órgão;
+ execução diária 09:00;
 
-cargo;
+ controle de falhas.
 
-salário;
+7.2 Pipeline completo
 
-quantidade de vagas;
+Fluxo:
 
-cadastro reserva;
+Cron
+ ↓
+Scrapers
+ ↓
+Banco
+ ↓
+Filtros
+ ↓
+Relatório
+ ↓
+Notificações
 
-escolaridade;
+7.3 Otimizações
 
-requisitos;
+Adicionar:
 
-cidade;
+ cache;
 
-estado;
+ retry;
 
-banca organizadora;
+ rate limit;
 
-data de publicação;
+ logs;
 
-data final das inscrições;
+ métricas.
 
-situação do concurso;
+Nova estrutura recomendada para o Lovable
 
-link oficial do edital;
+FASE 1
+Fundação
 
-link da notícia.
+FASE 2
+Banco
 
-Salvar quais concursos já foram enviados ao usuário.
+FASE 3
+Arquitetura de coleta
 
-Fase 6
+FASE 4
+Primeiro scraper
 
-Criar o sistema de notificações.
+FASE 5
+Demais scrapers
 
-Enviar o relatório por:
+FASE 6
+Motor de filtros
 
-e-mail;
+FASE 7
+Configuração de filtros do usuário
 
-WhatsApp.
+FASE 8
+Busca histórica
 
-Permitir integração com:
+FASE 9
+Relatórios
 
-E-mail:
+FASE 10
+Sistema de notificações
 
-SMTP;
+FASE 11
+Automação diária
 
-Resend;
-
-SendGrid.
-
-WhatsApp:
-
-Meta WhatsApp Cloud API;
-
-Evolution API.
-
-A implementação deve permitir trocar facilmente o provedor.
-
-Fase 7
-
-Criar o monitoramento automático.
-
-Todos os dias às 09:00 da manhã, executar automaticamente:
-
-consultar todos os sites;
-
-identificar apenas concursos novos;
-
-ignorar concursos já enviados anteriormente;
-
-enviar apenas as novidades.
-
-Caso não exista nenhum concurso novo, não enviar mensagem.
-
-Cadastro do usuário
-
-Cada usuário poderá configurar:
-
-e-mail;
-
-número de WhatsApp;
-
-cidade;
-
-estado;
-
-palavras-chave desejadas;
-
-palavras-chave bloqueadas;
-
-horário de envio;
-
-receber relatório diário ou apenas novidades.
-
-Requisitos técnicos
-
-Código limpo.
-
-Arquitetura em camadas.
-
-Componentes reutilizáveis.
-
-Serviços desacoplados.
-
-Testes unitários.
-
-Tratamento de erros.
-
-Retry automático em falhas temporárias.
-
-Cache para evitar consultas repetidas.
-
-Rate limiting para não sobrecarregar os sites.
-
-Logs estruturados.
-
-Toda a arquitetura deve ser preparada para facilitar a inclusão de novos sites de concursos no futuro.
-
-Sempre explique o que será desenvolvido em cada fase antes de gerar código. Aguarde minha aprovação antes de prosseguir para a próxima etapa.
-
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/261daa32-0c50-4e32-b29f-539d0534ab5e).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+FASE 12
+Otimização e testes
