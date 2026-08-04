@@ -1,6 +1,15 @@
 import type { RawContest } from "./scraper.interface";
 import type { ScraperError, ScraperErrorKind } from "./errors";
 
+export interface ScraperResultError {
+  kind: ScraperErrorKind;
+  message: string;
+  url?: string;
+  status?: number;
+}
+
+
+
 export interface ScraperRunResult {
   source: string;
   displayName: string;
