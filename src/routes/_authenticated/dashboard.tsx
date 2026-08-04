@@ -28,15 +28,20 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 });
 
 const roadmap = [
-  { fase: "Fase 1", titulo: "Estrutura, banco e autenticação", status: "Concluída" },
+  { fase: "Fase 1", titulo: "Fundação, autenticação e estrutura", status: "Concluída" },
   { fase: "Fase 2", titulo: "Modelagem completa do banco", status: "Concluída" },
-  { fase: "Fase 3", titulo: "Coletores dos 8 portais", status: "Próxima" },
-
-  { fase: "Fase 4", titulo: "Mecanismo de filtros", status: "Planejada" },
-  { fase: "Fase 5", titulo: "Primeira execução e relatório", status: "Planejada" },
-  { fase: "Fase 6", titulo: "Notificações e-mail e WhatsApp", status: "Planejada" },
-  { fase: "Fase 7", titulo: "Monitoramento diário às 09:00", status: "Planejada" },
+  { fase: "Fase 3", titulo: "Arquitetura do módulo de coleta", status: "Concluída" },
+  { fase: "Fase 4", titulo: "Primeiro scraper (PCI Concursos)", status: "Próxima" },
+  { fase: "Fase 5", titulo: "Demais scrapers, um por vez", status: "Planejada" },
+  { fase: "Fase 6", titulo: "Motor de filtros", status: "Planejada" },
+  { fase: "Fase 7", titulo: "Configuração de filtros do usuário", status: "Planejada" },
+  { fase: "Fase 8", titulo: "Busca histórica (6 meses)", status: "Planejada" },
+  { fase: "Fase 9", titulo: "Relatórios", status: "Planejada" },
+  { fase: "Fase 10", titulo: "Notificações e-mail e WhatsApp", status: "Planejada" },
+  { fase: "Fase 11", titulo: "Automação diária às 09:00", status: "Planejada" },
+  { fase: "Fase 12", titulo: "Otimização e testes", status: "Planejada" },
 ];
+
 
 function Dashboard() {
   const { user } = useAuth();
@@ -60,6 +65,11 @@ function Dashboard() {
           </div>
           <div className="flex items-center gap-3">
             <span className="hidden text-sm text-muted-foreground sm:inline">{user?.email}</span>
+            <Button variant="ghost" size="sm" asChild>
+              <Link to="/coleta">
+                <Radar className="h-4 w-4" aria-hidden /> Coleta
+              </Link>
+            </Button>
             <Button variant="ghost" size="sm" asChild>
               <Link to="/filtros">
                 <Filter className="h-4 w-4" aria-hidden /> Filtros
