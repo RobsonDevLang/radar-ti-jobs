@@ -4,15 +4,15 @@ export type ScraperErrorKind = "network" | "parse" | "blocked" | "timeout" | "un
 export class ScraperError extends Error {
   readonly kind: ScraperErrorKind;
   readonly source: string;
-  readonly url?: string;
-  readonly status?: number;
-  override readonly cause?: unknown;
+  readonly url: string | undefined;
+  readonly status: number | undefined;
+  override readonly cause: unknown;
 
   constructor(
     kind: ScraperErrorKind,
     source: string,
     message: string,
-    options: { url?: string; status?: number; cause?: unknown } = {},
+    options: { url?: string | undefined; status?: number | undefined; cause?: unknown } = {},
   ) {
     super(message);
     this.name = "ScraperError";

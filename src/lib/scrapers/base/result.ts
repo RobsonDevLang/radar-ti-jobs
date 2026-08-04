@@ -10,7 +10,7 @@ export interface ScraperRunResult {
   durationMs: number;
   startedAt: string;
   finishedAt: string;
-  error?: { kind: ScraperErrorKind; message: string; url?: string; status?: number };
+  error?: ScraperResultError | undefined;
 }
 
 export interface CollectionReport {
