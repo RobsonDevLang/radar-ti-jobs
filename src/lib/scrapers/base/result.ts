@@ -33,7 +33,7 @@ export interface CollectionReport {
   results: ScraperRunResult[];
 }
 
-export function toResultError(error: ScraperError): ScraperRunResult["error"] {
+export function toResultError(error: ScraperError): ScraperResultError {
   return {
     kind: error.kind,
     message: error.message,
